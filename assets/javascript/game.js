@@ -16,7 +16,7 @@ var lossCount = 0;
 
 //functions
 
-
+// get a random number for target score
 var getRandom = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -50,6 +50,7 @@ var startGame = function() {
 
 //game logic
 
+//change these .click to .html so that they appear on the screen
 
 startGame();
 

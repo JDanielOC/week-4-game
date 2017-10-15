@@ -1,18 +1,15 @@
 // variables
 
-
 var vaiJem = 0;
 var fenderEsquire = 0;
 var lesPaul = 0;
 var rickGlo = 0;
 
-var currentScore = 0;
+var yourScore = 0;
 var targetScore = 0;
 
 var winCount = 0;
 var lossCount = 0;
-
-
 
 //functions
 
@@ -24,7 +21,7 @@ var getRandom = function(min, max) {
 var startGame = function() {
 
     //reset score
-    currentScore = 0;
+    yourScore = 0;
 
     //set random target score
     targetScore = getRandom(19, 120);
@@ -35,37 +32,66 @@ var startGame = function() {
     lesPaul = getRandom(1, 12);
     rickGlo = getRandom(1, 12);
 
-// use jQuery to insert html items
-	$("#yourScore").html(currentScore);
-	$("#targetScore").html(targetScore);
-
-
-    console.log("Target Score: " + targetScore);
-    console.log("JEM: " + vaiJem + " | Esquire: " + fenderEsquire + " | Les Paul: " + lesPaul + " | Rickenbacker: " + rickGlo);
+    // use jQuery to insert .html items for target, score, wins and losses
+    $("#yourScore").html(yourScore);
+    $("#targetScore").html(targetScore);
+       $("#winCount").html(winCount);
+       $("#lossCount").html(winCount);
 
 }
 
+//functions for winning or losing.
 
+function winner() {
+    if(yourScore === targetScore) {
+        winCount++;
+    }else if(yourScore > targetScore) {
+        lossCount++;
+        alert("I'm sorry, but you're just too darn loud.");
+    } else {
+
+    }
+    
+
+    // $("#winCount").text("Wins:" + winCount);
+    
+}
 
 
 //game logic
 
-//change these .click to .html so that they appear on the screen
 
-startGame();
+// startGame function
 
-$("#jem").click(function() {
-    alert("jem");
-});
+startGame(); {
 
-$("#esquire").click(function() {
-    alert("esquire");
-});
+    //add calculated yourScore + guitar value and update on html 
 
-$("#les").click(function() {
-    alert("les");
-});
+    $("#jem").click(function() {
+        yourScore += vaiJem;
+        $("#yourScore").html(yourScore);
 
-$("#rick").click(function() {
-    alert("rick");
-});
+    });
+
+    $("#esquire").click(function() {
+        yourScore += fenderEsquire;
+        $("#yourScore").html(yourScore);
+    });
+
+    $("#les").click(function() {
+        yourScore += lesPaul;
+        $("#yourScore").html(yourScore);
+    });
+
+    $("#rick").click(function() {
+        yourScore += rickGlo;
+        $("#yourScore").html(yourScore);
+    });
+
+}
+// console.log to see if scores and values operate correctly
+console.log("Target Score: " + targetScore);
+console.log("Your Score: " + yourScore);
+console.log("JEM: " + vaiJem + " | Esquire: " + fenderEsquire + " | Les Paul: " + lesPaul + " | Rickenbacker: " + rickGlo);
+console.log("Your Wins: " + winCount);
+console.log("Your Losses: " + lossCount);

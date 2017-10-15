@@ -1,12 +1,12 @@
 // variables
 
-// var vaiJem = 0;
-// var fenderEsquire = 0;
-// var lesPaul = 0;
-// var rickGlo = 0;
+var vaiJem = 0;
+var fenderEsquire = 0;
+var lesPaul = 0;
+var rickGlo = 0;
 
-// var yourScore = 0;
-// var targetScore = 0;
+var yourScore = 0;
+var targetScore = 0;
 
 var winCount = 0;
 var lossCount = 0;
@@ -43,7 +43,7 @@ var startGame = function() {
 
 //game logic
 
-startGame(); {
+startGame();
 
     //add calculated yourScore + guitar value and update on html 
 
@@ -71,11 +71,14 @@ startGame(); {
         console.log("Your Score: " + yourScore);
     });
 
+
+
     //functions for winning or losing.
-    
+
     /*This is not working. I can see that targetNumber and yourScore both display
     and yourScore calculates. When it equals targetNumber...nothing. When it exceeds
-    targetNumber...nothing. No increase in winCount or lossCount.*/
+    targetNumber...nothing. No increase in winCount or lossCount. I can set the 
+    if else to say if (yourScore !== targetScore) and get an alert, though.*/
 
     if (yourScore === targetScore) {
         winCount++;
@@ -89,11 +92,16 @@ startGame(); {
         startGame();
     }
 
+    if (winCount === 5) {
+        alert("You're ready to rock! Hit the stage!")
+    }
+
+    if (lossCount === 5) {
+        alert("Time for some lessons and maybe tune that thing.")
+    }
 
     console.log("Target Score: " + targetScore);
     console.log("JEM: " + vaiJem + " | Esquire: " + fenderEsquire + " | Les Paul: " + lesPaul + " | Rickenbacker: " + rickGlo);
     console.log("Your Wins: " + winCount);
     console.log("Your Losses: " + lossCount);
 
-
-};

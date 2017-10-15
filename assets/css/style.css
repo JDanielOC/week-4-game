@@ -1,12 +1,4 @@
 
-html body {
-	height: 100%;
-}
-
-.container {
-	min-height: 100%;
-	overflow: hidden;
-}
 
 .page-header {
 	margin: 20px 0 20px;
@@ -16,5 +8,9 @@ html body {
 	font-family: 'Concert One', cursive;
 	color: white;
 
+}
+
+.guitar {
+	max-height: 500px;
 }
 

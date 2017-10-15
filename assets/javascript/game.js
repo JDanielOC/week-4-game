@@ -18,6 +18,7 @@ var getRandom = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// startGame function
 var startGame = function() {
 
     //reset score
@@ -33,35 +34,16 @@ var startGame = function() {
     rickGlo = getRandom(1, 12);
 
     // use jQuery to insert .html items for target, score, wins and losses
-    $("#yourScore").html(yourScore);
-    $("#targetScore").html(targetScore);
-       $("#winCount").html(winCount);
-       $("#lossCount").html(winCount);
+    $("#playerScore").html(yourScore);
+    $("#cpuScore").html(targetScore);
+    $("#wins").html(winCount);
+    $("#losses").html(lossCount);
 
 }
-
-//functions for winning or losing.
-
-function winner() {
-    if(yourScore === targetScore) {
-        winCount++;
-    }else if(yourScore > targetScore) {
-        lossCount++;
-        alert("I'm sorry, but you're just too darn loud.");
-    } else {
-
-    }
-    
-
-    // $("#winCount").text("Wins:" + winCount);
-    
-}
-
 
 //game logic
 
 
-// startGame function
 
 startGame(); {
 
@@ -69,29 +51,42 @@ startGame(); {
 
     $("#jem").click(function() {
         yourScore += vaiJem;
-        $("#yourScore").html(yourScore);
+        $("#playerScore").html(yourScore);
 
     });
 
     $("#esquire").click(function() {
         yourScore += fenderEsquire;
-        $("#yourScore").html(yourScore);
+        $("#playerScore").html(yourScore);
     });
 
     $("#les").click(function() {
         yourScore += lesPaul;
-        $("#yourScore").html(yourScore);
+        $("#playerScore").html(yourScore);
     });
 
     $("#rick").click(function() {
         yourScore += rickGlo;
-        $("#yourScore").html(yourScore);
+        $("#playerScore").html(yourScore);
     });
 
-}
-// console.log to see if scores and values operate correctly
-console.log("Target Score: " + targetScore);
-console.log("Your Score: " + yourScore);
-console.log("JEM: " + vaiJem + " | Esquire: " + fenderEsquire + " | Les Paul: " + lesPaul + " | Rickenbacker: " + rickGlo);
-console.log("Your Wins: " + winCount);
-console.log("Your Losses: " + lossCount);
+    //functions for winning or losing.
+
+
+    if (yourScore == targetScore) {
+        winCount++;
+    } else if (yourScore > targetScore) {
+        lossCount++;
+        alert("I'm sorry, but you're just too darn loud.");
+    } else {
+
+
+    }
+
+
+    console.log("Target Score: " + targetScore);
+    console.log("Your Score: " + yourScore);
+    console.log("JEM: " + vaiJem + " | Esquire: " + fenderEsquire + " | Les Paul: " + lesPaul + " | Rickenbacker: " + rickGlo);
+    console.log("Your Wins: " + winCount);
+    console.log("Your Losses: " + lossCount);
+};

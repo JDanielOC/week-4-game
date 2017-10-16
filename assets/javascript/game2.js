@@ -8,12 +8,12 @@ reset game function
 */
 
 //variables
-
-var yourScore = 0;
+var yourScore;
 var winCount = 0;
-var lossCount = 0;
+var losscount = 0;
+var targetScore;
 
-console.log("your score: " + yourScore);
+
 
 // get a random number for target score
 var getRandom = function(min, max) {
@@ -24,6 +24,11 @@ var getRandom = function(min, max) {
 
 var startGame = function() {
 
+
+    //reset yourScore
+    yourScore = 0;
+    winCount = 0;
+    lossCount = 0;
     //set random target score
     targetScore = getRandom(19, 120);
 
@@ -37,6 +42,11 @@ var startGame = function() {
 
     console.log("random guitar values: " + "Vai " + vaiJem + " | Esquire " + fenderEsquire + " | Les Paul " + lesPaul + " | Rickenbacker " + rickGlo);
 
+    $("#playerScore").html(yourScore);
+    $("#cpuScore").html(targetScore);
+    $("#wins").html(winCount);
+    $("#losses").html(lossCount);
+
 }
 
 //start the game
@@ -48,57 +58,60 @@ startGame();
 $("#jem").click(function() {
     yourScore += vaiJem;
     $("#playerScore").html(yourScore);
-    console.log("Your Score: " + yourScore);
+    evaluateGame();
 });
 
 $("#esquire").click(function() {
     yourScore += fenderEsquire;
     $("#playerScore").html(yourScore);
-    console.log("Your Score: " + yourScore);
+    evaluateGame();
 });
 
 $("#les").click(function() {
     yourScore += lesPaul;
     $("#playerScore").html(yourScore);
-    console.log("Your Score: " + yourScore);
+    evaluateGame();
 });
 
 $("#rick").click(function() {
     yourScore += rickGlo;
     $("#playerScore").html(yourScore);
-    console.log("Your Score: " + yourScore);
+    evaluateGame();
 });
 
 //print yourScore / targetScore / winCount / lossCount to html file $(id).html(var);
 
-$("#playerScore").html(yourScore);
-$("#cpuScore").html(targetScore);
-$("#wins").html(winCount);
-$("#losses").html(lossCount);
+    if (winCount === 5) {
+        alert("You're ready to rock! Hit the stage!")
+    };
 
-//if statements for scoring and game win/losses
+    if (lossCount === 5) {
+        alert("I'm sorry, but... you're just too darn loud.")
+    };
 
-/*This is not working. I can see that targetNumber and yourScore both display
-    and yourScore calculates. When it equals targetNumber...nothing. When it exceeds
-    targetNumber...nothing. No increase in winCount or lossCount. I can set the 
-    if else to say if (yourScore !== targetScore) and get an alert, though. */
 
-if (yourScore === targetScore) {
-    winCount++;
-    alert("Rock on! Keep playing!");
-    startGame();
-};
+/*if statements for scoring and game win/losses wrapping them in a function 
+ and calling that function above made winning/losing possible.*/
 
-if (yourScore > targetScore) {
-    lossCount++;
-    alert("Maybe you should tune that thing before you play some more.");
-    startGame();
-};
+/*This is not working. Game runs fine and game resets when won or lost. 
+However, no increase in winCount or lossCount. */
 
-if (winCount === 5) {
-    alert("You're ready to rock! Hit the stage!")
-};
+var evaluateGame = function() {
 
-if (lossCount === 5) {
-    alert("I'm sorry, but... you're just too darn loud.")
+    if (yourScore === targetScore) {
+        winCount++;
+        alert("Rock on! Keep playing!");
+        startGame();
+    };
+
+    if (yourScore > targetScore) {
+        lossCount++;
+        alert("Maybe you should tune that thing before you play some more.");
+        startGame();
+    };
+
+    console.log("wincount: " + winCount);
+    console.log("losscount: " + lossCount);
+    console.log("Your Score: " + yourScore);
+
 };

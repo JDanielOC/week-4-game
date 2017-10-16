@@ -1,34 +1,35 @@
 /*
-create variables for scores and counts that will be altered as game is played.
-create a random number generator function to be used by guitars and cpu target score.
-print to html file using jQuery .html yourScore/targetScore/wins/losses
-add if statements to increase points for wins and losses
-add if statements to determine if 5 games have been won or lost
-reset game function
+-create variables for scores and counts that will be altered as game is played.
+-create a random number generator function to be used by guitars and cpu target score.
+-print to html file using jQuery .html yourScore/targetScore/wins/losses
+-add if statements to increase points for wins and losses
+-add if statements to determine if 5 games have been won or lost
+-reset game function
 */
 
 //variables
 var yourScore;
-var winCount = 0;
-var losscount = 0;
+var winCount;
+var lossCount;
 var targetScore;
-
-
 
 // get a random number for target score
 var getRandom = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
+var resetCounters = function() {
+    winCount = 0;
+    lossCount = 0;
+}
 // startGame function to pull random numbers from the getRandom number generator
 
 var startGame = function() {
 
-
     //reset yourScore
     yourScore = 0;
-    winCount = 0;
-    lossCount = 0;
+
     //set random target score
     targetScore = getRandom(19, 120);
 
@@ -44,15 +45,12 @@ var startGame = function() {
 
     $("#playerScore").html(yourScore);
     $("#cpuScore").html(targetScore);
-    $("#wins").html(winCount);
-    $("#losses").html(lossCount);
-
 }
 
 //start the game
 
 startGame();
-
+resetCounters();
 //write .click to print to html for each guitar
 
 $("#jem").click(function() {
@@ -79,22 +77,17 @@ $("#rick").click(function() {
     evaluateGame();
 });
 
+
 //print yourScore / targetScore / winCount / lossCount to html file $(id).html(var);
-
-    if (winCount === 5) {
-        alert("You're ready to rock! Hit the stage!")
-    };
-
-    if (lossCount === 5) {
-        alert("I'm sorry, but... you're just too darn loud.")
-    };
-
+$("#wins").html(winCount);
+$("#losses").html(lossCount);
 
 /*if statements for scoring and game win/losses wrapping them in a function 
  and calling that function above made winning/losing possible.*/
 
 /*This is not working. Game runs fine and game resets when won or lost. 
-However, no increase in winCount or lossCount. */
+However, no increase in winCount or lossCount. FIXED - turns out I was setting wins
+and losses to zero in the startGame function. Maniacal, I tell you. */
 
 var evaluateGame = function() {
 
@@ -109,7 +102,18 @@ var evaluateGame = function() {
         alert("Maybe you should tune that thing before you play some more.");
         startGame();
     };
+    if (winCount === 3) {
+        alert("You're ready to rock! Hit the stage!");
+        resetCounters();
+    };
 
+    if (lossCount === 3) {
+        alert("I'm sorry, but... you're just too darn loud.");
+        resetCounters();
+    };
+
+    $("#wins").html(winCount);
+    $("#losses").html(lossCount);
     console.log("wincount: " + winCount);
     console.log("losscount: " + lossCount);
     console.log("Your Score: " + yourScore);
